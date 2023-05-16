@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Homepage |
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Page d'accueil</h1>
+
+    {% for data in donnees %}
+        <p>{{ data }}</p>
+    {% endfor %}
+
+{% endblock %}
