@@ -1,0 +1,23 @@
+<div class="blog-card">
+    {% if article.imageName %} {# vérifie que imageName est défini #}
+        <img src="{{ vich_uploader_asset(article)}}" alt="{{ article.titre }}" class="blog-card-img" loading="lazy">
+    {% else %}
+        <img src="https://picsum.photos/350/250" alt="{{ article.titre }}" class="blog-card-img" loading="lazy">     {# picsum est une API d'images random#}
+    {% endif %}
+    <div class="blog-card-content">
+        <p class="blog-card-date">{{ article.createdAt|format_datetime('full','none') }}</p>
+        <h2 class="blog-card-header">{{ article.titre}}</h2>
+        <p class="blog-card-contenu">{{ article.contenu|slice(0,100) ~ '...' }}</p>
+        <p class="blog-card-author">{{ article.user.fullName}}</p>
+        {% if app.request.get('_route') == 'admin.article.index' %} {# affiche les boutons modifier supprimer uniquement si est sur admin#}
+            <div class="d-flex justify-content-between">
+                <a href="{{ path('admin.article.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+                <form action="{{path('admin.article.delete', {id: article.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr(e) de vouloir supprimer cet article ?')">
+                    <input type="hidden" name="id" value="{{article.id}}">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete' ~ article.id )}}">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</div>

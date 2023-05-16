@@ -1,0 +1,27 @@
+.blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1em;
+
+    .blog-card {   /*equiv de .blog-list .blog-card { } */
+        width: 30% ;
+        border-radius: $border-radius;
+        background: $white;
+        box-shadow: $box-shadow-blog-card;
+        margin-top: 4em;
+    
+
+        &-img {
+            width: 90%;
+            margin: -4em auto 0;
+            border-radius: $border-radius;
+            box-shadow: $box-shadow-blog-img;
+        }
+
+        &-content{
+            padding: 1em 2em;
+        }
+    }
+
+}

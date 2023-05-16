@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -21,6 +22,14 @@ class ArticleType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Titre de votre article',
                 ]
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image:',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image',
+                'download_uri' => false,
+                'image_uri' => true,
             ])
             ->add('contenu', TextareaType::class,[
                 'label' => 'Contenu :',
