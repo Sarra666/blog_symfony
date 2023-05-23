@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Modification d'une catégorie |
+    {{ parent()}}
+{% endblock %}
+{% block body %}
+
+    <section class="container mt-4">
+        <h1 class="text-center">Modification d'une catégorie</h1>
+        {% include 'Backend/Categorie/_form.html.twig'   with {button_label : 'Modifier'}%}
+    </section>
+{% endblock %}

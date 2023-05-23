@@ -94,4 +94,6 @@ class ArticleController extends AbstractController
         $this->addFlash('error', 'Token invalide');
         return $this->redirectToRoute('admin.article.index');
     }
+
+    
 }

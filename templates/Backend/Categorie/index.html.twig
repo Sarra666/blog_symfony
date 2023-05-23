@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des catégories |
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-4">
+        <h1 class="text-center">Administration des catégories</h1>
+        <a href="{{ path('admin.categorie.create') }}" class="btn btn-secondary">Créer une catégorie</a>
+        <div class="blog-list">
+        {% for categorie in categories %}
+            <div class="blog-card tags">
+                <div class="blog-card-content">
+                    <h2 class="blog-card-header">{{categorie.titre}}</h2>
+                    <p>{{categorie.actif ? 'Active' : 'Non active'}}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ path('admin.categorie.update', {id: categorie.id})}}" class="btn btn-warning">Modifier<a>
+                        {% include 'Backend/Categorie/_deleteForm.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
