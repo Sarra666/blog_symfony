@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Admin des articles |
+	Liste des articles |
 	{{ parent() }}
 {% endblock %}
 
 {% block body %}
 	<section class="container mt-4">
-		<h1 class="text-center">Administration des articles</h1>
-		<a href="{{ path('admin.article.create') }}" class="btn btn-secondary">Créer un article</a>
-		<div class="blog-list mt-4">
+		<h1 class="text-center">Liste des articles</h1>
+		<div class="blog-list">
 			{% for article in articles %}
 				{% include 'Components/_card.html.twig' %}
 			{% endfor %}

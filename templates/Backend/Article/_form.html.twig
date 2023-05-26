@@ -1,7 +1,6 @@
-{{ form_start(form, {'attr' : {'class' : 'card p-3 w-75 mx-auto'}})}}
-{{ form_widget(form)}}
-<div class="text-color">
-    <button type="submit" class="btn btn-secondary ">{{ button_label|default('save')}}</button>
+{{ form_start(form, {'attr': {'class': 'card p-3 w-75 mx-auto'}}) }}
+{{ form_widget(form) }}
+<div class="text-center">
+	<button type="submit" class="btn btn-secondary">{{ button_label|default('save') }}</button>
 </div>
-{{ form_end(form)}}
-
+{{ form_end(form) }}

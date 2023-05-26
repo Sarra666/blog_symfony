@@ -27,7 +27,7 @@ class Article
     #[Assert\Length(
         min: 5,
         max: 255,
-        minMessage: 'Le titre ne peux pas être inférieur à {{ limit }} caractères.',
+        minMessage: 'Le titre ne peux pas être inferieur à {{ limit }} caractères.',
         maxMessage: 'Le titre ne peux pas être supérieur à {{ limit }} caractères.'
     )]
     #[Assert\NotBlank(message: 'Le titre ne peux pas être vide')]
@@ -126,6 +126,18 @@ class Article
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -149,7 +161,7 @@ class Article
 
         return $this;
     }
-    
+
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this

@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Categorie;
-use App\Form\CategorieType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,19 +15,16 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'Titre :',
+                'label' => 'titre:',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Titre de votre catégorie',
+                    'placeholder' => 'Titre de votre article',
                 ]
             ])
-        
-            ->add('actif', CheckboxType::class,  [
+            ->add('actif', CheckboxType::class, [
                 'label' => 'Actif',
-                'required'=> false,
-            ])
-            
-            ;
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

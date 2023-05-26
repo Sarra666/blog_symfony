@@ -4,31 +4,43 @@
     justify-content: space-between;
     gap: 1em;
 
-    .blog-card {   /*equiv de .blog-list .blog-card { } */
-        width: 30% ;
+    .blog-card {
+        width: 30%;
         border-radius: $border-radius;
         background: $white;
         box-shadow: $box-shadow-blog-card;
         margin-top: 4em;
-    
+
+        .link-img {
+            height: 50%;
+            width: 100%;
+            margin: -4em auto 0;
+            display: block;
+        }
 
         &-img {
             width: 90%;
-            margin: -4em auto 0; /* effet pour que l'image sorte de la carte*/
+            margin: -4em auto 0;
             display: block;
             border-radius: $border-radius;
             box-shadow: $box-shadow-blog-img;
-            height: 50%;
+            height: 100%;
             object-fit: cover;
         }
 
-        &-content{
+        &-content {
             padding: 2em 2em 1em;
             height: calc(50% + 4em);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-    }
 
+        &.tags {
+            .blog-card-content {
+                padding: 1em;
+                height: unset;
+            }
+        }
+    }
 }

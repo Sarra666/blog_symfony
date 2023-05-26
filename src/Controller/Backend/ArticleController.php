@@ -25,7 +25,7 @@ class ArticleController extends AbstractController
         return  $this->render(
             'Backend/Article/index.html.twig',
             [
-                'articles' => $this->repo->findAll(),
+                'articles' => $this->repo->findAllWithTags(),
             ]
         );
     }
@@ -41,7 +41,7 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setUser($this->getUser());
-            
+
             $this->repo->save($article, true);
 
             $this->addFlash('success', 'Article created successfully');
@@ -79,21 +79,25 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name:'.delete', methods: ['POST', 'DELETE'])]
+    #[Route('/delete/{id}', name: '.delete', methods: ['POST', 'DELETE'])]
     public function delete(?Article $article, Request $request): RedirectResponse
     {
-        if(!$article instanceof Article){
-            $this->addFlash('error', 'Article not found');
+        if (!$article instanceof Article) {
+            $this->addFlash('error',  'Article not found');
+
             return $this->redirectToRoute('admin.article.index');
         }
-        if($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('token'))){
+
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('token'))) {
             $this->repo->remove($article, true);
+
             $this->addFlash('success', 'Article deleted successfully');
+
             return $this->redirectToRoute('admin.article.index');
         }
+
         $this->addFlash('error', 'Token invalide');
+
         return $this->redirectToRoute('admin.article.index');
     }
-
-    
 }
