@@ -4,6 +4,7 @@ namespace App\Controller\Backend;
 
 use App\Entity\User;
 
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,33 +53,34 @@ class UserController extends AbstractController
         return $this->render('Backend/Article/create.html.twig', [
             'form' => $form
         ]);
-    }
+    }*/
 
-    #[Route('/update/{id}', name: '.update', methods: ['GET', 'POST'])]
-    public function update(?Article $article, Request $request): Response|RedirectResponse
+    #[Route('/{id}/edit', name: '.update', methods: ['GET', 'POST'])]
+    public function update(?User $user, Request $request): Response|RedirectResponse
     {
-        if (!$article instanceof Article) {
-            $this->addFlash('error', 'Article not found');
+        if (!$user instanceof User) {
+            $this->addFlash('error', 'User not found');
 
-            return $this->redirectToRoute('admin.article.index');
+            return $this->redirectToRoute('admin.user.index');
         }
 
-        $form = $this->createForm(ArticleType::class, $article);
+        //TODO: create form user with condition and return view
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->repo->save($article, true);
+            $this->repo->save($user, true);
 
-            $this->addFlash('success', 'Article modified  successfully');
+            $this->addFlash('success', 'User profile modified  successfully');
 
-            return $this->redirectToRoute('admin.article.index');
+            return $this->redirectToRoute('admin.user.index');
         }
 
-        return $this->render('Backend/Article/update.html.twig', [
+        return $this->render('Backend/User/edit.html.twig', [
             'form' => $form,
         ]);
     }
-
+/*
     #[Route('/delete/{id}', name: '.delete', methods: ['POST', 'DELETE'])]
     public function delete(?Article $article, Request $request): RedirectResponse
     {
