@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('admin') }}
+{% endblock %}
+
+{% block title %}
+	Admin des utilisateurs |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-4">
+		<h1 class="text-center">Administration des utilisateurs</h1>	
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Rôles</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %} 
+                    <tr>
+                        <td>{{ user.id}}</td>
+                        <td>{{ user.lastname}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.roles| json_encode}}</td>
+                        <td>
+                            <a href="#" class="btn btn-secondary">Modifier</a>
+                        </td>
+                    </tr>
+				
+			    {% endfor %}
+            </tbody>
+        </table>
+			
+		
+	</section>
+{% endblock %}

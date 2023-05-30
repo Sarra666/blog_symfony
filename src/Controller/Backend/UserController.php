@@ -2,9 +2,9 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Article;
-use App\Form\ArticleType;
-use App\Repository\ArticleRepository;
+use App\Entity\User;
+
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,11 +12,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin/article', name: 'admin.article')]
-class ArticleController extends AbstractController
+#[Route('/admin/users', name: 'admin.user')]
+class UserController extends AbstractController
 {
     public function __construct(
-        private readonly ArticleRepository $repo
+        private readonly UserRepository $repo
     ) {
     }
 
@@ -24,14 +24,13 @@ class ArticleController extends AbstractController
     public function index(): Response
     {
         return  $this->render(
-            'Backend/Article/index.html.twig',
+            'Backend/User/index.html.twig',
             [
-                'articles' => $this->repo->findAllWithTags(),
-            ]
-        );
+                'users' => $this->repo->findAll(),
+            ]);
     }
 
-    #[Route('/create', name: ".create", methods: ['GET', 'POST'])]
+ /*   #[Route('/create', name: ".create", methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
         // Création d'un nouvel objet Article
@@ -113,5 +112,5 @@ class ArticleController extends AbstractController
         $this->repo->save($article, true); // trus flush $article vers la BDD
 
         return new JsonResponse('Visibility changed', 200);
-    }
+    }*/
 }
