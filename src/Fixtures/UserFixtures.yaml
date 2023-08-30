@@ -1,0 +1,18 @@
+#on définit le namespace de l'entity que l'on veut créer
+App\Entity\User:
+  #On va créer un utilisateur et on donne un nom à cette fixture
+  userAdmin:
+    #On définit la valeur de chaque propriété pour créer un user
+    firstName: "Pierre"
+    lastName: "Bertrand"
+    email: "admin@test.com"
+    roles: ["ROLE_ADMIN"]
+    password: <hashPassword('Test1234')>
+  
+  user{1..10}:
+    firstName: <firstName()>
+    lastName: <lastName()>
+    email (unique): user-<current()>\@test.com  
+    roles: <randomElements(['ROLE_USER','ROLE_EDITOR', 'ROLE_ADMIN'])>
+    password: <hashPassword('Test1234')>
+    

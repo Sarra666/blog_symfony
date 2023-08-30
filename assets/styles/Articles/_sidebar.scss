@@ -1,12 +1,13 @@
-.article-main-content{
+.article-main-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 1em;
 
-    .sidebar{
+    .sidebar {
         width: 30%;
 
-        .categories-list{
+        .categories-list {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -15,12 +16,11 @@
                 padding: 5px 10px;
                 border-radius: $border-radius;
                 background: $secondary;
-    
             }
         }
-       
     }
-    .article-content{
-        width: 67%;
+
+    .article-content {
+        flex: 1;
     }
 }

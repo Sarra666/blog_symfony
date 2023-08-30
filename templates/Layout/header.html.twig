@@ -8,12 +8,11 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav me-auto mt-2 mt-lg-0">
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.get('_route') == 'homepage' ? 'active'}}" href="{{ path('homepage') }}" aria-current="page">Home</a>
+						<a class="nav-link {{ app.request.get('_route') == 'homepage' ? 'active' }}" href="{{ path('homepage') }}">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.get('_route') == 'app.article.index' ? 'active'}}"  href="{{ path('app.article.index') }}">Articles</a>
+						<a class="nav-link {{ app.request.get('_route') == 'app.article.index' ? 'active' }}" href="{{ path('app.article.index') }}">Articles</a>
 					</li>
-					
 				</ul>
 			</div>
 			<div class="navbar-nav gap-2 ms-auto">
@@ -28,13 +27,13 @@
 								<div class="dropdown-divider"></div>
 								<a href="{{ path('admin.categorie.index') }}" class="dropdown-item">Catégorie</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="{{path('admin.user.index')}}">Utilisateurs</a>
+								<a class="dropdown-item" href="{{ path('admin.user.index') }}">Users</a>
 							</div>
 						</div>
 					{% endif %}
 					<a href="{{ path('app.logout') }}" class="btn btn-danger">Deconnexion</a>
 				{% else %}
-					<a href="{{path('app.user.register')}}" class="btn btn-secondary me-2">S'inscrire</a>
+					<a href="{{ path('app.user.register') }}" class="btn btn-secondary me-2">S'inscrire</a>
 					<a href="{{ path('app.login') }}" class="btn btn-light">Connexion</a>
 				{% endif %}
 			</div>

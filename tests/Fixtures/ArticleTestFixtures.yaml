@@ -1,0 +1,9 @@
+include:
+    - UserTestFixtures.yaml
+
+App\Entity\Article:
+    article{1..20}:
+        titre (unique): Titre-<current()>
+        contenu: <sentence(10)>
+        actif: <boolean()>
+        user: "@userAdmin"

@@ -26,13 +26,15 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{slug}', name: '.show', methods: ['GET'])]
-    public function showArticle(?Article $article ): Response|RedirectResponse
+    public function showArticle(?Article $article): Response|RedirectResponse
     {
-        if(!$article instanceof Article || !$article->isActif()) {
-            $this-> addFlash('error', 'Article not found');
-            return $this-> redirectToRoute('app.article.index');
-        }         
-            return $this->render('Frontend/Article/show.html.twig', [
+        if (!$article instanceof Article || !$article->isActif()) {
+            $this->addFlash('error', 'Article not found');
+
+            return $this->redirectToRoute('app.article.index');
+        }
+
+        return $this->render('Frontend/Article/show.html.twig', [
             'article' => $article,
         ]);
     }

@@ -34,7 +34,7 @@ class UserController extends AbstractController
 
             $this->repo->save($user, true);
 
-            $this->addFlash('success', 'Vous êtes bien inscrit à notre application');
+            $this->addFlash('success', 'Vous être bien inscrit à notre application');
 
             return $this->redirectToRoute('app.login');
         }

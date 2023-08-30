@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ article.titre}}
-
-    {{ parent()}}
+	{{ article.titre }}
+	|
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}
-    {% include 'Frontend/Article/_banner.html.twig' %}
+	{% include 'Frontend/Article/_banner.html.twig' %}
 
-    <section class="container mt-4 article-main-content">
-        {% include 'Frontend/Article/_sidebar.html.twig' %}
-        {% include 'Frontend/Article/_content.html.twig' %}
-    </section> 
+	<section class="container mt-4 article-main-content">
+		{% include 'Frontend/Article/_sidebar.html.twig' %}
+		{% include 'Frontend/Article/_content.html.twig' %}
+	</section>
 {% endblock %}

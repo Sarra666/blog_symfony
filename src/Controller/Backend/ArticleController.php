@@ -103,14 +103,14 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/switch/{id}', name: '.switch', methods: ['GET'])]
-    public function switchVisibilityArticle (?Article $article): JsonResponse
+    public function switchVisibiltyArticle(?Article $article): JsonResponse
     {
-        if(!$article instanceof Article) {
+        if (!$article instanceof Article) {
             return new JsonResponse('Article not found', 404);
         }
 
         $article->setActif(!$article->isActif());
-        $this->repo->save($article, true); // trus flush $article vers la BDD
+        $this->repo->save($article, true);
 
         return new JsonResponse('Visibility changed', 200);
     }

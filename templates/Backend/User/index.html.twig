@@ -1,50 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{{ encore_entry_link_tags('admin') }}
-{% endblock %}
-
-{% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('admin') }}
-{% endblock %}
-
 {% block title %}
-	Admin des utilisateurs |
-	{{ parent() }}
+    Admin des users |
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
-	<section class="container mt-4">
-		<h1 class="text-center">Administration des utilisateurs</h1>	
+    <section class="container mt-4">
+        <h1 class="text-center">Administration des users</h1>
         <table class="table mt-4">
             <thead>
                 <tr>
                     <td>Id</td>
                     <td>Nom</td>
                     <td>Prénom</td>
-                    <td>Rôles</td>
+                    <td>Email</td>
+                    <td>Roles</td>
                     <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
-                {% for user in users %} 
+                {% for user in users %}
                     <tr>
-                        <td>{{ user.id}}</td>
-                        <td>{{ user.lastname}}</td>
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.roles| json_encode}}</td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.roles|json_encode }}</td>
                         <td>
-                            <a href="#" class="btn btn-secondary">Modifier</a>
+                            <a href="{{ path('admin.user.update', {'id': user.id }) }}" class="btn btn-secondary">Modifier</a>
+                            {% include 'Backend/User/_deleteForm.html.twig' %}
                         </td>
                     </tr>
-				
-			    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
-			
-		
-	</section>
+    </section>
 {% endblock %}

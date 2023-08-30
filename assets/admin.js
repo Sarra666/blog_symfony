@@ -1,3 +1,5 @@
+// Load Style admin
 import './styles/admin.scss';
 
-import './Js/switchVisibilityArticle.js';
+// Load js admin
+import './Js/switchVisibilityArticle';

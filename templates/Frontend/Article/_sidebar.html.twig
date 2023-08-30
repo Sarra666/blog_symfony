@@ -1,26 +1,26 @@
 <aside class="sidebar">
-    <div class="sidebar-informations">
-        <h2>Informations :</h2>
-        <p>
-            <strong>Date de création :</strong> 
-            {{ article.createdAt | format_datetime('full', 'none')}}
-        </p>
-        <p>
-            <strong>Auteur :</strong>
-            {{article.user.fullname}}
-        </p>
-        {% if article.categories | length > 0 %}
-            <div class="sidebar-categories">
-                <h2>Catégories :</h2>
-                <div class="categories-list">
-                {% for categorie in article.categories %}
-                    <span class="categorie-item">
-                        <i class="bi bi-tags"></i>
-                        {{categorie.titre}}
-                    </span>
-                {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-    </div>
+	<div class="sidebar-informations">
+		<h2>Informations:</h2>
+		<p>
+			<strong>Date de création :</strong>
+			{{ article.createdAt|format_datetime('full', 'none') }}
+		</p>
+		<p>
+			<strong>Auteur:</strong>
+			{{ article.user.fullName }}
+		</p>
+	</div>
+	{% if article.categories|length > 0 %}
+		<div class="sidebar-categories">
+			<h2>Catégories:</h2>
+			<div class="categories-list">
+				{% for categorie in article.categories %}
+					<span class="categorie-item">
+						<i class="bi bi-tags"></i>
+						{{ categorie.titre }}
+					</span>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
 </aside>
