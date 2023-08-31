@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Search\SearchArticle;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -16,8 +19,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private PaginatorInterface $paginator
+        ){
         parent::__construct($registry, Article::class);
     }
 
@@ -56,6 +61,39 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findSearchArticle(SearchArticle $search): PaginationInterface
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('a','u', 'c')
+            ->innerJoin('a.user', 'u')
+            ->leftJoin('a.categories', 'c')
+            ->andWhere('a.actif= true');
+
+        if( !empty($search->getTitle())) {
+                $query ->andWhere('a.titre LIKE :title')
+                ->setParameter('title', "%{$search->getTitle()}%");
+        }
+        if(!empty($search->getTags())){
+            $query->andWhere('c.id IN (:tags)')
+                ->setParameter('tags', $search->getTags());
+        }
+        if(!empty($search->getAuthors())){
+            $query->andWhere('u.id IN (:authors)')
+                ->setParameter('authors', $search->getAuthors());
+        }
+
+        $query->orderBy('a.createdAt', 'DESC')
+            ->getQuery();
+
+        return $this->paginator->paginate(
+            //Requête DQL à envoyer en BDD
+            $query,
+            // Numéro de la page
+            $search->getPage(),
+            // Nb d'éléments par page
+            6
+        );
+    }
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

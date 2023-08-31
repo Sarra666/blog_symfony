@@ -3,7 +3,10 @@
 namespace App\Controller\Frontend;
 
 use App\Entity\Article;
+use App\Search\SearchArticle;
+use App\Form\SearchArticleType;
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,10 +21,21 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/liste', name: '.index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+
+        $searchArticle = new SearchArticle();
+
+        $searchArticle->setPage($request->query->get('page', 1));
+
+        $form = $this -> createForm(SearchArticleType::class, $searchArticle);
+        $form->handleRequest($request);
+
+        $articles= $this->repo->findSearchArticle($searchArticle);
+
         return $this->render('Frontend/Article/index.html.twig', [
-            'articles' => $this->repo->findAllWithTags(true),
+            'articles' => $articles,
+            'form'=> $form,
         ]);
     }
 

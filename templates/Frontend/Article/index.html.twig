@@ -8,10 +8,18 @@
 {% block body %}
 	<section class="container mt-4">
 		<h1 class="text-center">Liste des articles</h1>
-		<div class="blog-list">
-			{% for article in articles %}
-				{% include 'Components/_card.html.twig' %}
-			{% endfor %}
+		<div class="row">
+			<aside class="col-md-3">
+				{% include 'Components/_form.html.twig' with {form} only %}
+			</aside>
+			<div class="col-md-9">
+				<div class="d-flex justify-content-between align-items-center">
+					{% include 'Components/_count.html.twig' with {articles} only %}
+					{% include 'Components/_sortable.html.twig' with {articles} only %}
+				</div>
+				{% include 'Components/_articleList.html.twig' %}
+				{% include 'Components/_pagination.html.twig' with { articles} only %}
+			</div>
 		</div>
 	</section>
 {% endblock %}
