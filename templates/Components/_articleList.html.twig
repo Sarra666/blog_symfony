@@ -1,9 +1,9 @@
-<div class="blog-list js-filter-content">
+
 	{% for article in articles %}
 		{% include 'Components/_card.html.twig' %}
         {% else %}
         <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-square-fill"></i>
             <p>Votre recherche ne correspond à aucun article</p>
         </div>
 	{% endfor %}
-</div>

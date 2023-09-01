@@ -17,7 +17,9 @@
 					{% include 'Components/_count.html.twig' with {articles} only %}
 					{% include 'Components/_sortable.html.twig' with {articles} only %}
 				</div>
-				{% include 'Components/_articleList.html.twig' %}
+				<div class="blog-list js-filter-content" data-total-page="{{ totalPage}}">
+					{% include 'Components/_articleList.html.twig' %}
+				</div>
 				{% include 'Components/_pagination.html.twig' with { articles} only %}
 			</div>
 		</div>
