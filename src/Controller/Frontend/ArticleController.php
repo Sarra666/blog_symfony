@@ -9,6 +9,7 @@ use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,7 +22,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/liste', name: '.index', methods: ['GET'])]
-    public function index(Request $request): Response
+    public function index(Request $request): Response|JsonResponse
     {
 
         $searchArticle = new SearchArticle();
@@ -32,6 +33,23 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         $articles= $this->repo->findSearchArticle($searchArticle);
+
+        if($request->query->get('ajax')) {
+            return new JsonResponse([
+                'content' =>$this->renderView('Components/_articleList.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'sortable' => $this ->renderView('Components/_sortable.html.twig', [
+                    'articles' => $articles,
+                ] ),
+                'pagination' => $this ->renderView('Components/_pagination.html.twig', [
+                    'articles' => $articles,
+                ] ),
+                'count' => $this ->renderView('Components/_count.html.twig', [
+                    'articles' => $articles,
+                ] ),
+            ]);
+        }
 
         return $this->render('Frontend/Article/index.html.twig', [
             'articles' => $articles,
