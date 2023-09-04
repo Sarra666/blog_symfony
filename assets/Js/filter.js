@@ -1,4 +1,5 @@
 import { debounce } from "lodash";
+import { Flipper, spring} from "flip-toolkit";
 
 
 
@@ -92,13 +93,8 @@ export class Filter {
 
         if(response.status >= 200 && response.status < 300 ){
             const data = await response.json();
-            if(append){
-                this.content.innerHTML += data.content;
-                
-            } else {
-                this.content.innerHTML = data.content;
-                
-            }
+           
+            this.flipContent(data.content, append);
 
             if(!this.showMore){
                 this.pagination.innerHTML = data.pagination;
@@ -148,6 +144,23 @@ export class Filter {
         const params = new URLSearchParams(url.search);
         params.set('page', this.page);
         this.loadUrl(url.pathname + '?' + params.toString(), true);
+    }
+
+    /*
+    * Add animation transition for change content
+    * @param {string} content - String with HTML of the new content
+    * @param {bool} append - If replace or add the content
+    */
+   flipContent(content , append) {
+        const flipper = new Flipper({element: this.content});
+        let cards = this.content.children; //variable qui contient tous les articles
+
+        for( let card of cards){
+            flipper.addFlipped({
+                element: card,
+                flipId: card.id,
+            });
+        }
     }
 /**
  * Show the loader element of the form
