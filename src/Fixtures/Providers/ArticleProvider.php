@@ -24,15 +24,16 @@ class ArticleProvider
     public function generateDateTimeImmutable(): \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear());
-
     }
+
     public function uploadImageArticle(): UploadedFile
     {
-        $files = glob(realpath(__DIR__ . '/Images/Articles/'). '/*.*');
+        $files = glob(realpath(__DIR__ . '/Images/Articles/') . '/*.*');
 
         $file = $files[array_rand($files)];
 
         $imageFile = new File($file);
+
         return new UploadedFile($imageFile, $imageFile->getFilename());
     }
 }

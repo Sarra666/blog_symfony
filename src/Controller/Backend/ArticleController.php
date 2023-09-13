@@ -23,7 +23,7 @@ class ArticleController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
-        return  $this->render(
+        return $this->render(
             'Backend/Article/index.html.twig',
             [
                 'articles' => $this->repo->findAllWithTags(),

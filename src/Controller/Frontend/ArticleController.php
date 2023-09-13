@@ -24,38 +24,37 @@ class ArticleController extends AbstractController
     #[Route('/liste', name: '.index', methods: ['GET'])]
     public function index(Request $request): Response|JsonResponse
     {
-
         $searchArticle = new SearchArticle();
 
         $searchArticle->setPage($request->query->get('page', 1));
 
-        $form = $this -> createForm(SearchArticleType::class, $searchArticle);
+        $form = $this->createForm(SearchArticleType::class, $searchArticle);
         $form->handleRequest($request);
 
-        $articles= $this->repo->findSearchArticle($searchArticle);
+        $articles = $this->repo->findSearchArticle($searchArticle);
 
-        if($request->query->get('ajax')) {
+        if ($request->query->get('ajax')) {
             return new JsonResponse([
-                'content' =>$this->renderView('Components/_articleList.html.twig', [
+                'content' => $this->renderView('Components/_articleList.html.twig', [
                     'articles' => $articles,
                 ]),
-                'sortable' => $this ->renderView('Components/_sortable.html.twig', [
+                'sortable' => $this->renderView('Components/_sortable.html.twig', [
                     'articles' => $articles,
-                ] ),
-                'pagination' => $this ->renderView('Components/_pagination.html.twig', [
-                    'articles' => $articles,
-                ] ),
-                'count' => $this ->renderView('Components/_count.html.twig', [
-                    'articles' => $articles,
-                ] ),
-                'totalPage' => ceil($articles->getTotalItemCount() /$articles->getItemNumberPerPage()),
+                ]),
+                'pagination' => $this->renderView('Components/_pagination.html.twig', [
+                    'articles' => $articles
+                ]),
+                'count' => $this->renderView('Components/_count.html.twig', [
+                    'articles' => $articles
+                ]),
+                'totalPage' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
             ]);
         }
 
         return $this->render('Frontend/Article/index.html.twig', [
             'articles' => $articles,
-            'form'=> $form,
-            'totalPage' => ceil($articles->getTotalItemCount() /$articles->getItemNumberPerPage()),
+            'form' => $form,
+            'totalPage' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
         ]);
     }
 

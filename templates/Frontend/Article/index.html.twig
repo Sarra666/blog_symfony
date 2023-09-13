@@ -10,17 +10,17 @@
 		<h1 class="text-center">Liste des articles</h1>
 		<div class="row">
 			<aside class="col-md-3">
-				{% include 'Components/_form.html.twig' with {form} only %}
+				{% include 'Components/_form.html.twig' with { form } only %}
 			</aside>
 			<div class="col-md-9">
 				<div class="d-flex justify-content-between align-items-center">
-					{% include 'Components/_count.html.twig' with {articles} only %}
-					{% include 'Components/_sortable.html.twig' with {articles} only %}
+					{% include 'Components/_count.html.twig' with { articles } only %}
+					{% include 'Components/_sortable.html.twig' with { articles } only %}
 				</div>
-				<div class="blog-list js-filter-content" data-total-page="{{ totalPage}}">
+				<div class="blog-list js-filter-content" data-total-page="{{ totalPage }}">
 					{% include 'Components/_articleList.html.twig' %}
 				</div>
-				{% include 'Components/_pagination.html.twig' with { articles} only %}
+				{% include 'Components/_pagination.html.twig' with { articles } only %}
 			</div>
 		</div>
 	</section>

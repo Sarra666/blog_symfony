@@ -1,10 +1,10 @@
-<div class="blog-card" id="article-{{article.id}}">
+<div class="blog-card" id="article-{{ article.id }}">
 	<a href="{{ path('app.article.show', {slug: article.slug}) }}" class="link-img">
-		{% if article.imageName %}
-			<img src="{{ vich_uploader_asset(article) }}" alt="{{ article.titre }}" class="blog-card-img" loading="lazy">
+		{% for image in article.images| slice(0,1) %}
+			<img src="{{ vich_uploader_asset(image) }}" alt="{{ article.titre }}" class="blog-card-img" loading="lazy">
 		{% else %}
 			<img src="https://picsum.photos/350/250" alt="{{ article.titre }}" class="blog-card-img" loading="lazy">
-		{% endif %}
+		{% endfor %}
 	</a>
 	<div class="blog-card-content">
 		<p class="blog-card-date text-muted">{{ article.createdAt|format_datetime('full', 'none') }}</p>
@@ -19,12 +19,12 @@
 			{% endfor %}
 		</p>
 		{% if app.request.get('_route') == 'admin.article.index' %}
-		
+
 			<div class="form-check form-switch">
 				<input class="form-check-input" type="checkbox" id="article-actif-{{ article.id }}" data-actif-id="{{ article.id }}" {{ article.actif ? 'checked' }}>
 				<label class="form-check-label" for="article-actif-{{ article.id }}">Actif</label>
 			</div>
-			
+
 			<div class="d-flex justify-content-between mt-auto">
 				<a href="{{ path('admin.article.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
 				<form action="{{ path('admin.article.delete', {id: article.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cet article ?')">

@@ -13,19 +13,17 @@ class CategorieProvider
             'React',
             'VueJS',
             'Angular',
-            'Frontend',
+            'Framework',
             'Backend',
+            'Frontend',
             'Fullstack',
             'API',
             'REST',
             'GraphQL',
             'SQL',
-            'MySQL'
+            'Mysql'
         ];
-
 
         return $tags[array_rand($tags)];
     }
-
-   
 }

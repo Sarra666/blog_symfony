@@ -22,7 +22,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(
         ManagerRegistry $registry,
         private PaginatorInterface $paginator
-        ){
+    ) {
         parent::__construct($registry, Article::class);
     }
 
@@ -64,20 +64,22 @@ class ArticleRepository extends ServiceEntityRepository
     public function findSearchArticle(SearchArticle $search): PaginationInterface
     {
         $query = $this->createQueryBuilder('a')
-            ->select('a','u', 'c')
+            ->select('a', 'u', 'c')
             ->innerJoin('a.user', 'u')
             ->leftJoin('a.categories', 'c')
-            ->andWhere('a.actif= true');
+            ->andWhere('a.actif = true');
 
-        if( !empty($search->getTitle())) {
-                $query ->andWhere('a.titre LIKE :title')
+        if (!empty($search->getTitle())) {
+            $query->andWhere('a.titre LIKE :title')
                 ->setParameter('title', "%{$search->getTitle()}%");
         }
-        if(!empty($search->getTags())){
+
+        if (!empty($search->getTags())) {
             $query->andWhere('c.id IN (:tags)')
                 ->setParameter('tags', $search->getTags());
         }
-        if(!empty($search->getAuthors())){
+
+        if (!empty($search->getAuthors())) {
             $query->andWhere('u.id IN (:authors)')
                 ->setParameter('authors', $search->getAuthors());
         }
@@ -85,11 +87,11 @@ class ArticleRepository extends ServiceEntityRepository
         $query->getQuery();
 
         return $this->paginator->paginate(
-            //Requête DQL à envoyer en BDD
+            // Requête DQL à ennvoyer en BDD
             $query,
             // Numéro de la page
             $search->getPage(),
-            // Nb d'éléments par page
+            // Nombre d'éléments par page
             6,
             [
                 'defaultSortFieldName' => ['a.createdAt'],
@@ -97,6 +99,7 @@ class ArticleRepository extends ServiceEntityRepository
             ]
         );
     }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

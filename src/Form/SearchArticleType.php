@@ -26,15 +26,15 @@ class SearchArticleType extends AbstractType
                 'required' => false,
             ])
             ->add('tags', EntityType::class, [
-                'label'=>'Catégories',
-                'class'=> Categorie::class,
+                'label' => 'Catégories',
+                'class' => Categorie::class,
                 'choice_label' => 'titre',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
-                'query_builder' => function (EntityRepository $er): QueryBuilder{
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
                     return $er->createQueryBuilder('c')
-                        ->andWhere('c.actif=true')
+                        ->andWhere('c.actif = true')
                         ->innerJoin('c.articles', 'a')
                         ->orderBy('c.titre', 'ASC');
                 }
@@ -44,13 +44,13 @@ class SearchArticleType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'fullName',
                 'multiple' => true,
-                'expanded'=> true,
+                'expanded' => true,
                 'required' => false,
-                'query_builder' => function(EntityRepository $er): QueryBuilder{
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
                     return $er->createQueryBuilder('u')
-                    ->innerJoin('u.articles', 'a')
-                    ->orderBy('u.firstName', 'ASC');
-                }            
+                        ->innerJoin('u.articles', 'a')
+                        ->orderBy('u.firstName', 'ASC');
+                }
             ]);
     }
 
@@ -59,10 +59,11 @@ class SearchArticleType extends AbstractType
         $resolver->setDefaults([
             // Configure your form options here
             'data_class' => SearchArticle::class,
-            'method'=>'GET',
-            'csrf_protection' =>false,
+            'method' => 'GET',
+            'csrf_protection' => false,
         ]);
     }
+
     public function getBlockPrefix(): string
     {
         return '';

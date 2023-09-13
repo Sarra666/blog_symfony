@@ -6,6 +6,7 @@
 
     .blog-card {
         width: 30%;
+        height: max-content;
         border-radius: $border-radius;
         background: $white;
         box-shadow: $box-shadow-blog-card;
@@ -43,7 +44,6 @@
             }
         }
     }
- 
 }
 
 ul.pagination {

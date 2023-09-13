@@ -1,16 +1,14 @@
-
 knp_gaufrette:
     stream_wrapper: ~
 
     adapters:
         article_adapter:
             local:
-                directory:  '%kernel.project_dir%/public/images/articles'
-           
+                directory: "%kernel.project_dir%/public/images/articles"
+
     filesystems:
         article_fs:
-           adapter: article_adapter
-
+            adapter: article_adapter
 
 vich_uploader:
     db_driver: orm
